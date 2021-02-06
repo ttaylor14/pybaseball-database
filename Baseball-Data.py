@@ -209,7 +209,7 @@ def yearGrab(currentSeason):
     PitchingStats_Team_Year.to_csv('data/YearlyData/temp/team_pstats.csv')
 
 
-
+    """
     # Year Standings
     if currentSeason >=1969:
         from pybaseball import standings
@@ -217,9 +217,9 @@ def yearGrab(currentSeason):
         Standings = standings(currentSeason)
         Standings.insert(0, 'Season', currentSeason)
         Standings.to_csv('data/YearlyData/temp/team_standings.csv')
+    """
 
-
-
+    """
     # Amateur Draft Data
     if currentSeason >= 1965:
 
@@ -242,6 +242,7 @@ def yearGrab(currentSeason):
             A_Draft = A_Draft.append(Amateur_Draft, ignore_index=True)
             #Save new round to File
             A_Draft.to_csv('data/YearlyData/temp/amateur_draft.csv', sep=',', index=False, encoding='utf-8')
+        """
 
 
     # Exit Veolocity Data
@@ -423,7 +424,7 @@ def combineStats(currentSeason):
     All_Team_Pit = team_pitching_stats_all.append(team_pstats, ignore_index=True)
     All_Team_Pit.to_csv('data/YearlyData/All_Team_Pitching_Stats.csv', sep=',', index=False, encoding='utf-8')
 
-
+    """
     if currentSeason >=1969:
         ## Team Standings Stats
         Standings = pd.read_csv('data/YearlyData/temp/team_standings.csv') 
@@ -431,7 +432,8 @@ def combineStats(currentSeason):
 
         All_Stand = Standings_all.append(Standings, ignore_index=True)
         All_Stand.to_csv('data/YearlyData/All_Standings.csv', sep=',', index=False, encoding='utf-8')
-
+    """
+    """
     if currentSeason >= 1965:
         ## Amateur Draft Data for first 30 rounds each year available
         a_draft = pd.read_csv('data/YearlyData/temp/amateur_draft.csv') 
@@ -439,6 +441,7 @@ def combineStats(currentSeason):
 
         All_A_Draft = A_Draft_all.append(a_draft, ignore_index=True)
         All_A_Draft.to_csv('data/YearlyData/All_Amateur_Draft.csv', sep=',', index=False, encoding='utf-8')
+    """
 
     ## StatCast Exit Velocity Data
     e_velo = pd.read_csv('data/YearlyData/temp/statcast_exit_velocity.csv') 
@@ -591,16 +594,18 @@ def Create_Stat_Files():
         R = pd.read_csv('data/YearlyData/All_Team_Pitching_Stats.csv')
         filename = "%s_Team_Pitching_Stats.csv" % x
         R.to_csv(foldername + filename)
-
+        """
         if x >= 1969:
             R = pd.read_csv('data/YearlyData/team_Standings.csv')
             filename = "%s_Standings.csv" % x
             R.to_csv(foldername + filename)
-
+        """
+        """
         if x >= 1965:
             R = pd.read_csv('data/YearlyData/temp/amateur_draft.csv')
             filename = "%s_Amateur_Draft.csv" % x
             R.to_csv(foldername + filename)
+        """
 
         if x > 2007:
             R = pd.read_csv('data/YearlyData/temp/statcast_exit_velocity.csv')
