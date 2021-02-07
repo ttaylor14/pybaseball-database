@@ -10,6 +10,12 @@
 # And creating a Start to End category list (ie. Batting Stats from 2018-2020)
 
 
+
+# was able to get through WSH of 2013 before file got to big to process statcast.
+# need to seperate out statcast and do each year first before combining
+
+
+
 import pandas as pd
 import os
 
