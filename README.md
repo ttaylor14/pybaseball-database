@@ -99,8 +99,11 @@ Takes approximately 30 minutes to 1 hour per year
 # Future Additions/changes
 
 [ ] - Combining Lahman Database data into 1 complete file
+
 [ ] - Creating an additional file to add a single new season to the database and reduce run speed for post 2021 season
+
 [ ] - investigate columns with mixed types and resolve the issues
+
 
 
 
