@@ -10,10 +10,7 @@
 # And creating a Start to End category list (ie. Batting Stats from 2018-2020)
 
 
-
-# was able to get through WSH of 2013 before file got to big to process statcast.
-# need to seperate out statcast and do each year first before combining
-
+# Statcast Data Pull was moved to a seperate file
 
 
 import pandas as pd
@@ -326,70 +323,6 @@ def combineYear(currentSeason):
 
 
 
-def statcast_Data(currentSeason):
-    from pybaseball import statcast
-    import os
-    import pandas as pd
-
-    # StatCast Data Started in 2008
-    # Some Features were not added until 2015
-    if currentSeason > 2007:
-
-        # Select Start and End Date to Pull data
-        Start_Day = "%s-04-01" % currentSeason
-        End_Day = "%s-10-03" % currentSeason
-
-        # Create Folder and File Path
-        foldername = "data/YearlyData/%s/StatCast/" % currentSeason
-        filename_part = "%s_Statcast_" % currentSeason
-        print(foldername)
-
-        # Check/Build Directory
-        if not os.path.exists(foldername): #adds directory is not already created
-            os.mkdir(foldername) 
-
-
-        # Create Empty StatCast Master File for All teams for each year
-        df = pd.DataFrame(list())
-        All_Stat_Foldername = 'data/YearlyData/%s/' % currentSeason
-        All_Stat_Filename = '%s_All_StatCast.csv' % currentSeason
-        All_Stat_Path = (All_Stat_Foldername + All_Stat_Filename)
-        df.to_csv(All_Stat_Path)
-
-        #Create Team List to cycle Through
-        Team_List = ['ARI', 'ATL', 'BAL', 'BOS', 'CHC', 'CWS', 'CIN', 'CLE', 'COL', 'DET', 'HOU', 'KC', 'LAA', 'LAD', 'MIA', 'MIL', 'MIN', 'NYM', 'NYY', 'OAK', 'PHI', 'PIT', 'SD', 'SEA', 'SF', 'STL', 'TB', 'TEX', 'TOR', 'WSH']
-
-
-        # Loop Through all Teams pulling data from selected dates
-        # Saved as individual Team Files
-        # Also Saved as 1 master file
-        for i in Team_List:
-
-            # Get all data for each team in the current season
-            statcast_data = statcast(Start_Day, End_Day, team=i)
-                
-            # Build File Name for Statcast Data for individual Team
-            teamname = "%s.csv" % i        
-            filename = (filename_part + teamname)
-            statcast_data.to_csv(foldername + filename)
-
-            # Read Master Statcast File for Year
-            statcast_data_file_all = pd.read_csv(All_Stat_Path)
-
-            # Add New Team Data to Statcast Year Data
-            All_StatCast_File = statcast_data.append(statcast_data_file_all, ignore_index=True)
-
-            # Save new Data to File
-            All_StatCast_File.to_csv(All_Stat_Path)
-
-            print(str(currentSeason) + " Statcast Data for : " + str(i) + " : Successful")
-
-    
-    print(str(currentSeason) + " All Statcast Data for : Successful")
-
-
-
-
 # Combining Like Stats into a Multi-Year CSV (ie. All Batting Stats for a given year span)
 def combineStats(currentSeason):
 
@@ -522,7 +455,6 @@ def Clear_CSV():
     df.to_csv('data/YearlyData/All_Standings.csv')
     df.to_csv('data/YearlyData/All_Amateur_Draft.csv')
     df.to_csv('data/YearlyData/All_Exit_Velocity.csv')
-    df.to_csv('data/YearlyData/All_StatCast.csv')
     df.to_csv('data/YearlyData/All_Team_Pitching_Stats.csv')
     df.to_csv('data/YearlyData/All_Team_Batting_Stats.csv')
 
@@ -555,24 +487,6 @@ def Create_Stat_Files():
         combineYear(x)
         # Combine Data by Stats
         combineStats(x)
-        #StatCast Data for each year
-        statcast_Data(x)
-        if x > 2007:
-            # Find Statcast All Year Data
-            Year_Stat_Foldername = 'data/YearlyData/%s/' % x
-            Year_Stat_Filename = '%s_All_StatCast.csv' % x
-            Year_Stat_Path = (Year_Stat_Foldername + Year_Stat_Filename)
-
-            # Read Statcast Files
-            year_statcast = pd.read_csv(Year_Stat_Path) 
-            statcast_all = pd.read_csv('data/YearlyData/All_StatCast.csv')
-
-            #Add year's Data and upload
-            All_StatCast = statcast_all.append(year_statcast, ignore_index=True)
-            All_StatCast.to_csv('data/YearlyData/All_StatCast.csv', sep=',', index=False, encoding='utf-8')
-
-
-
 
 
         foldername = "data/YearlyData/%s/" % x
@@ -613,10 +527,6 @@ def Create_Stat_Files():
             R.to_csv(foldername + filename)
         """
 
-        if x > 2007:
-            R = pd.read_csv('data/YearlyData/temp/statcast_exit_velocity.csv')
-            filename = "%s_Exit_Velocity.csv" % x
-            R.to_csv(foldername + filename)
 
         """
         R = pd.read_csv('data/YearlyData/fan_bat.csv')
@@ -648,7 +558,6 @@ def Create_Stat_Files():
 # yearGrab(2017)      # Verified Success
 # combineYear(2017)   # Verified Success
 # combineStats(2017)  # Verified Success
-# statcast_Data(2018) # Verified Success
 # print("Successful")
 
 
