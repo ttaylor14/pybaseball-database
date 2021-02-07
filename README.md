@@ -48,7 +48,7 @@ Each Year folder contains
 - All Team Pitching Stats
 
 -After 2007:
-- Statcast Exit Velocity Data is Added
+- Statcast Exit Velocity Data is added
 
 
 ## Data is also combined into a file containing data from all the selected years
@@ -57,7 +57,7 @@ files include:
 - All Batting Stats
 - All Pitching Stats
 - All Combined Stats
-- All Exit Velocty Stats
+- All Exit Velocity Stats
 - All FanGraph Stats
 - All Team Batting Data
 - All Team Pitching Data
@@ -67,8 +67,15 @@ files include:
 Data to later include:
 
 [ ] - Team Standings (Currently pulled as a long list and needs to be transformed into a DataFrame)
-[ ] - Amateur Draft (Code Works, but more research is needed to pull all data)
+
+[ ] - Amateur Draft (Code Works, but more research is needed to pull all data) (additional file?)
+
 [ ] - Fielding Data (pybaseball Fielding Code was not working - may need to use Fangraph/lahman)
+
+[ ] - Add fangraph data to each year folder?
+
+[ ] - Possibly add lahman data to each year folder?
+
 
 
 # Step 3:
@@ -76,7 +83,7 @@ Data to later include:
 Run file: 
 'StatcastPull.py'
 
-* Safe Guard is in place, but Stacast Data begain in 2008
+* Safe Guard is in place, but Stacast Data began in 2008
 
 This file will pull all statcast data for 1 season
 
@@ -102,7 +109,7 @@ Takes approximately 30 minutes to 1 hour per year
 
 [ ] - Creating an additional file to add a single new season to the database and reduce run speed for post 2021 season
 
-[ ] - investigate columns with mixed types and resolve the issues
+[ ] - Investigate columns with mixed types and resolve the issues
 
 
 
