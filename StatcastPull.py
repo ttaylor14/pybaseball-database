@@ -90,7 +90,7 @@ def statcast_Data(currentSeason):
 
 
 
-        print(str(x) + ": Successful")
+    print(str(currentSeason) + ": Successful")
 
 
 
