@@ -16,21 +16,12 @@
 
 
 
+from pybaseball import statcast
 import pandas as pd
 import os
 
 
-
-FirstYear = 1950  # First Year to Pull Data
-LastYear = 2020   # Last year to Pull Data
-
-
-
-
 def statcast_Data(currentSeason):
-    from pybaseball import statcast
-    import os
-    import pandas as pd
 
     # StatCast Data Started in 2008
     # Some Features were not added until 2015
@@ -90,13 +81,6 @@ def statcast_Data(currentSeason):
 
 
 
-    print(str(currentSeason) + ": Successful")
 
-
-
-
-
-# Function Tests
-
-statcast_Data(2018) # Verified Success
+statcast_Data(2020) 
 print("Successful")
